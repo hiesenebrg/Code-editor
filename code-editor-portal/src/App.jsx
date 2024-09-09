@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Home from './pages/Home';
 import EditorPage from './pages/EditorPage';
 import Login from './pages/Login';
+import CollaborativeCodeEditor from './components/collaborative-code-editor';
 
 function App() {
     return (
@@ -27,7 +28,11 @@ function App() {
                     <Route path="/" element={<Home />}></Route>
                     <Route
                         path="/editor/:roomId"
-                        element={<EditorPage />}
+                        element={<CollaborativeCodeEditor />}
+                    ></Route>
+                    <Route
+                        path="/collabcode"
+                        element={<CollaborativeCodeEditor/>}
                     ></Route>
                 </Routes>
         </>
