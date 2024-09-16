@@ -6,14 +6,14 @@ import { Provider } from "react-redux";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./redux/store.js";
-import ThemeWrapper from "./ThemeWrapper.js";
+import ThemeWrapper from "./ThemeWrapper.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
-    <ThemeWrapper>
+      <ThemeWrapper>
         <App />
-       </ThemeWrapper>
-            </Provider>
+      </ThemeWrapper>
+    </Provider>
   </BrowserRouter>
 );

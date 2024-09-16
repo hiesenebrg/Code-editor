@@ -1,27 +1,32 @@
 import { loginFailure, loginStart, loginSuccess } from "../redux/userRedux";
 import { publicRequest, userRequest } from "../requestMethod";
 
-  export const signup = async(dispatch, payload)=>{
-    dispatch(loginStart());
+export const signup = async (dispatch, payload) => {
+  dispatch(loginStart());
 
-    try {
-      let res = await publicRequest.post("user/sign-up", payload);
-      dispatch(loginSuccess(res.data));
-      console.log(res.data);
-      return res.data;
-    } catch (error) {
-      console.log("signup error", error);
-      dispatch(loginFailure());
-      return error;
-
-    }
+  try {
+    let res = await publicRequest.post("user/sign-up", payload);
+    dispatch(loginSuccess(res.data));
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log("signup error", error);
+    dispatch(loginFailure());
+    return error;
   }
-export const signIn = async (user, credentials) => {
+};
+export const signIn = async (dispatch, credentials) => {
+  dispatch(loginStart());
+
   try {
     let res = await publicRequest.post("user/sign-in", credentials);
+    res.data?.success
+      ? dispatch(loginSuccess(res.data.data))
+      : dispatch(loginFailure());
     return res.data;
   } catch (error) {
     console.log("There is an error while login", error);
+    dispatch(loginFailure());
     return error;
   }
 };
@@ -88,7 +93,7 @@ export const getMovieLinkAPI = async (movieId) => {
   }
 };
 
-export const getPopularMovies = async ( pageNumber) => {
+export const getPopularMovies = async (pageNumber) => {
   try {
     const token = localStorage.getItem("token");
 

@@ -26,10 +26,8 @@ import {
   useParams,
 } from 'react-router-dom';
 import Editor from './Editor'
+import CodeEditors from './CodeEditors'
 function CollaborativeCodeEditor({ initialUsers, initialCode }) {
-  const [users, setUsers] = useState(initialUsers)
-  const [code, setCode] = useState(initialCode)
-  const [cursors, setCursors] = useState({})
   const [groupCode] = useState('ABC123') // Simulated group code
   const { toast } = useToast()
   const [chatMessages, setChatMessages] = useState([
@@ -44,21 +42,7 @@ function CollaborativeCodeEditor({ initialUsers, initialCode }) {
   const chatScrollRef = useRef(null)
   const { theme, setTheme } = useTheme()
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Simulate cursor movements
-      const newCursors = {}
-      users.forEach(user => {
-        newCursors[user.id] = {
-          line: Math.floor(Math.random() * code.split('\n').length),
-          ch: Math.floor(Math.random() * 40)
-        }
-      })
-      setCursors(newCursors)
-    }, 2000)
 
-    return () => clearInterval(interval);
-  }, [users, code])
 
   useEffect(() => {
     if (chatScrollRef.current) {
@@ -216,7 +200,7 @@ function CollaborativeCodeEditor({ initialUsers, initialCode }) {
             </div>
           ))}
         </ScrollArea>
-        <Button variant="destructive" className="mt-4" onClick={handleLeave}>
+        <Button variant="destructive" className="mt-4" onClick={leaveRoom}>
           Leave Group
         </Button>
       </div>
@@ -243,41 +227,8 @@ function CollaborativeCodeEditor({ initialUsers, initialCode }) {
 
         {/* Code Editor */}
         <Card className="flex-grow m-4 overflow-hidden flex flex-col">
-          {/* <CardHeader className="py-2">
-            <CardTitle>Code Editor</CardTitle>
-          </CardHeader>
-          <CardContent className="flex-grow overflow-hidden p-0">
-            <ScrollArea className="h-full">
-              <div className="font-mono text-sm bg-muted p-4">
-                {code.split('\n').map((line, index) => (
-                  <div key={index} className="relative">
-                    {line}
-                    {Object.entries(cursors).map(([userId, cursor]) => {
-                      const user = users.find(u => u.id === parseInt(userId))
-                      if (user && cursor.line === index) {
-                        return (
-                          (<div
-                            key={userId}
-                            className="absolute top-0 w-0.5 h-5"
-                            style={{
-                              left: `${cursor.ch * 8}px`,
-                              backgroundColor: user.color,
-                            }}>
-                            <div
-                              className="absolute top-5 left-0 bg-background text-foreground text-xs p-1 rounded whitespace-nowrap">
-                              {user.name}
-                            </div>
-                          </div>)
-                        );
-                      }
-                      return null
-                    })}
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
-          </CardContent> */}
-           <Editor
+       
+           <CodeEditors
                     socketRef={socketRef}
                     roomId={roomId}
                     onCodeChange={(code) => {

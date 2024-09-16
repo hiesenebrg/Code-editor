@@ -13,9 +13,7 @@ const userSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
-
       state.currentUser = action.payload;
-      console.log(action.payload);
       state.error = false;
       // state.currentUser = action.payload.data.user;
     },
@@ -24,7 +22,7 @@ const userSlice = createSlice({
       state.error = true;
     },
     update: (state, action) => {
-     console.log(action.payload);
+      console.log(action.payload);
       state.currentUser.data.user.email = action.payload.email;
       state.currentUser.data.user.username = action.payload.name;
       state.currentUser.data.user.password = action.payload.password;

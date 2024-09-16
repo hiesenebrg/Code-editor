@@ -10,6 +10,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toggleForm = () => {
+  
     setIsRegistering(!isRegistering);
   };
 
@@ -29,7 +30,7 @@ const Login = () => {
     }
 
     if (res && res.success) {
-      console.log("successs");
+      console.log("successs", isRegistering);
       !isRegistering ? navigate("/") : toggleForm();
     }
   };
@@ -89,12 +90,11 @@ const Login = () => {
 
       {/* Info Text for Login */}
       <div className={`info-text login ${isRegistering ? "animation" : ""}`}>
-        <h2 className="animation" style={{ "--i": 0, "--j": 20 }}>
+        <h2 className="animation font-bold" style={{ "--i": 0, "--j": 20 }}>
           Welcome Back!
         </h2>
-        <p className="animation" style={{ "--i": 1, "--j": 21 }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti,
-          rem?
+        <p className="animation text-sm" style={{ "--i": 1, "--j": 21 }}>
+          Experience Team code-editor where you can build projects with Team 
         </p>
       </div>
 
@@ -157,12 +157,12 @@ const Login = () => {
 
       {/* Info Text for Register */}
       <div className={`info-text register ${isRegistering ? "animation" : ""}`}>
-        <h2 className="animation" style={{ "--i": 17, "--j": 0 }}>
-          Welcome Back!
+        <h2 className="animation font-bold" style={{ "--i": 17, "--j": 0 }}>
+          Welcome!
         </h2>
-        <p className="animation" style={{ "--i": 18, "--j": 1 }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti,
-          rem?
+        <p className="animation text-sm" style={{ "--i": 18, "--j": 1 }}>
+        Experience Team code-editor where you can build projects with Team 
+
         </p>
       </div>
     </div>

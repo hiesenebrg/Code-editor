@@ -33,6 +33,7 @@ module.exports.handleSocketConnection = (io) => {
 
         // Code change event
         socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
+            console.log("code", code);
             socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
         });
 
@@ -43,6 +44,7 @@ module.exports.handleSocketConnection = (io) => {
 
         // Disconnect event
         socket.on('disconnecting', () => {
+            console.log("leaved");
             const rooms = [...socket.rooms];
             rooms.forEach((roomId) => {
                 socket.in(roomId).emit(ACTIONS.DISCONNECTED, {
