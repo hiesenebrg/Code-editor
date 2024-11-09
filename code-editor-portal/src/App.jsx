@@ -53,8 +53,7 @@ function App() {
       </div>
 
       <Routes>
-        <Route path="/login"
-         element={currentLoggedInUser ?<Home/> : <Login/>}/>
+        <Route path="/login" element={currentLoggedInUser ?<Home/> : <Login/>}/>
          
         <Route
           path="/"
@@ -64,14 +63,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/login"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
+       
 
         <Route
           path="/editor/:roomId"
