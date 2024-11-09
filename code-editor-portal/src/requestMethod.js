@@ -1,8 +1,8 @@
 // requestMethods.js
 import axios from 'axios';
 
-export const SOCKET_BASE_URL = 'http://localhost:8000';
-export const BASE_URL = 'http://localhost:8000/api';
+export const SOCKET_BASE_URL = 'https://code-editor-5vm5.onrender.com';
+export const BASE_URL = 'https://code-editor-5vm5.onrender.com/api';
 const TOKEN = 'adbc';
 
 export const publicRequest = axios.create({
