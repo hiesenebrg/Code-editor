@@ -81,7 +81,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
